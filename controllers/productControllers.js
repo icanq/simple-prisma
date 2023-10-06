@@ -1,7 +1,7 @@
-const { prisma } = require('../config/prisma')
+const { getProductsService } = require('../services/productServices')
 
 const getProductController = async (req, res) => {
-    const products = await prisma.product.findMany();
+    const products = await getProductsService()
     res.status(200).json(products)
 }
 
