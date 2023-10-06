@@ -20,6 +20,25 @@ app.get('/products', async (req, res) => {
     res.status(200).json(products)
 })
 
+app.post('/products', async (req, res) => {
+    const { nama, harga, deskripsi, gambar } = req.body;
+    console.log(req.body);
+    // todo setelah ngambil data dari request body, simpan ke database
+
+    const createdProduct = await prisma.product.create({
+        data: {
+            nama,
+            harga: Number(harga),
+            deskripsi,
+            gambar
+        }
+    })
+    res.status(201).json({
+        message: "Product berhasil dibuat",
+        data: createdProduct
+    })
+})
+
 app.listen(3000, () => {
     console.log('Example app listening on port 3000!');
 });
