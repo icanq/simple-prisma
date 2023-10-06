@@ -1,11 +1,9 @@
 const express = require('express');
 const productRoutes = express.Router();
-const { prisma } = require('../config/prisma')
+const { prisma } = require('../config/prisma');
+const { getProductController } = require('../controllers/productControllers');
 
-productRoutes.get('/', async (req, res) => {
-    const products = await prisma.product.findMany();
-    res.status(200).json(products)
-})
+productRoutes.get('/', getProductController)
 
 productRoutes.post('/', async (req, res) => {
     const { nama, harga, deskripsi, gambar } = req.body;
